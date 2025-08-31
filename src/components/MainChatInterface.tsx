@@ -248,10 +248,10 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
         <div className={`${isMobileView ? 'hidden' : 'block'} md:block transition-all duration-300 ease-in-out ${
           isSidebarCollapsed ? 'md:w-16' : 'md:w-80'
         }`}>
-          <div className="w-full md:w-80 bg-surface border-r border-border flex flex-col">
+          <div className={`${isSidebarCollapsed ? 'md:w-16' : 'md:w-80'} w-full bg-surface border-r border-border flex flex-col`}>
             {/* Header */}
-            <div className="p-4 border-b border-border">
-              <div className="flex items-center justify-between mb-4">
+            <div className={`${isSidebarCollapsed ? 'p-2' : 'p-4'} border-b border-border`}>
+              <div className={`flex items-center ${isSidebarCollapsed ? 'justify-center' : 'justify-between'} mb-4`}>
                 <div className={`flex items-center gap-3 ${isSidebarCollapsed ? 'justify-center' : ''}`}>
                   <img
                     src={currentUser.profileImage}
@@ -259,14 +259,14 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
                     className="w-10 h-10 rounded-full object-cover"
                   />
                   {!isSidebarCollapsed && (
-                    <div>
-                      <h1 className="font-semibold text-text">{currentUser.name}</h1>
-                      <p className="text-sm text-text-secondary">{currentUser.phoneNumber}</p>
+                    <div className="min-w-0 flex-1">
+                      <h1 className="font-semibold text-text truncate">{currentUser.name}</h1>
+                      <p className="text-sm text-text-secondary truncate">{currentUser.phoneNumber}</p>
                     </div>
                   )}
                 </div>
                 {!isSidebarCollapsed && (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 flex-shrink-0">
                     <ThemeToggle />
                     <button
                       onClick={() => {
@@ -347,38 +347,40 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
                           isSidebarCollapsed ? 'sidebar-item-collapsed' : ''
                         }`}
                       >
-                        <img
-                          src={otherParticipant.profileImage}
-                          alt={otherParticipant.name}
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                        <div className="relative">
+                          <img
+                            src={otherParticipant.profileImage}
+                            alt={otherParticipant.name}
+                            className="w-10 h-10 rounded-full object-cover"
+                          />
+                          {/* Show unread count badge when collapsed */}
+                          {isSidebarCollapsed && chat.unreadCount > 0 && (
+                            <span className="unread-badge">
+                              {chat.unreadCount}
+                            </span>
+                          )}
+                        </div>
                         {!isSidebarCollapsed && (
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
                               <h3 className="font-medium text-text truncate">
                                 {otherParticipant.name}
                               </h3>
-                              <span className="text-xs text-text-secondary">
+                              <span className="text-xs text-text-secondary flex-shrink-0 ml-2">
                                 {new Date(chat.lastMessageTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                               </span>
                             </div>
                             <div className="flex items-center justify-between mt-1">
-                              <p className="text-sm text-text-secondary truncate">
+                              <p className="text-sm text-text-secondary truncate flex-1">
                                 {chat.lastMessage || 'No messages yet'}
                               </p>
                               {chat.unreadCount > 0 && (
-                                <span className="bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-2">
+                                <span className="bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-2 flex-shrink-0">
                                   {chat.unreadCount}
                                 </span>
                               )}
                             </div>
                           </div>
-                        )}
-                        {/* Show unread count badge when collapsed */}
-                        {isSidebarCollapsed && chat.unreadCount > 0 && (
-                          <span className="unread-badge">
-                            {chat.unreadCount}
-                          </span>
                         )}
                       </div>
                     );

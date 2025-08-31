@@ -66,6 +66,10 @@
     @apply justify-center p-2;
   }
   
+  .sidebar-item-collapsed .sidebar-item {
+    @apply px-2 py-2;
+  }
+  
   .unread-badge {
     @apply absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center;
   }
