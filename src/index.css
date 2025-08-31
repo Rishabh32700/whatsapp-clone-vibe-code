@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-whatsapp-gray-200;
+  }
+  
+  body {
+    @apply bg-whatsapp-gray-100 text-whatsapp-gray-900 font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .message-bubble {
+    @apply max-w-xs lg:max-w-md px-3 py-2 rounded-lg text-sm;
+  }
+  
+  .message-bubble-sent {
+    @apply bg-whatsapp-green-500 text-white rounded-br-md;
+  }
+  
+  .message-bubble-received {
+    @apply bg-white text-whatsapp-gray-900 rounded-bl-md shadow-sm;
+  }
+  
+  .chat-input {
+    @apply flex-1 bg-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-whatsapp-green-500;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 hover:bg-whatsapp-gray-100 cursor-pointer transition-colors relative;
+  }
+  
+  .sidebar-item-active {
+    @apply bg-whatsapp-gray-200;
+  }
+  
+  .sidebar-item-collapsed {
+    @apply justify-center p-2;
+  }
+  
+  .unread-badge {
+    @apply absolute -top-1 -right-1 bg-whatsapp-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center;
+  }
+}
