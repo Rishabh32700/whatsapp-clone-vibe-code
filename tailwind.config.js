@@ -32,7 +32,17 @@ export default {
             800: '#1f2937',
             900: '#111827',
           }
-        }
+        },
+        // Theme-aware colors
+        primary: 'var(--color-primary)',
+        'primary-hover': 'var(--color-primary-hover)',
+        background: 'var(--color-background)',
+        surface: 'var(--color-surface)',
+        text: 'var(--color-text)',
+        'text-secondary': 'var(--color-text-secondary)',
+        border: 'var(--color-border)',
+        hover: 'var(--color-hover)',
+        shadow: 'var(--color-shadow)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

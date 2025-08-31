@@ -3,12 +3,36 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-primary: #25D366;
+    --color-primary-hover: #128C7E;
+    --color-background: #f0f2f5;
+    --color-surface: #ffffff;
+    --color-text: #1c1e21;
+    --color-text-secondary: #65676b;
+    --color-border: #e4e6ea;
+    --color-hover: #f2f3f5;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+  }
+
+  [data-theme="dark"] {
+    --color-primary: #25D366;
+    --color-primary-hover: #128C7E;
+    --color-background: #18191a;
+    --color-surface: #242526;
+    --color-text: #e4e6eb;
+    --color-text-secondary: #b0b3b8;
+    --color-border: #3e4042;
+    --color-hover: #3a3b3c;
+    --color-shadow: rgba(0, 0, 0, 0.3);
+  }
+
   * {
-    @apply border-whatsapp-gray-200;
+    @apply border-border;
   }
   
   body {
-    @apply bg-whatsapp-gray-100 text-whatsapp-gray-900 font-sans;
+    @apply bg-background text-text font-sans transition-colors duration-200;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -19,23 +43,23 @@
   }
   
   .message-bubble-sent {
-    @apply bg-whatsapp-green-500 text-white rounded-br-md;
+    @apply bg-primary text-white rounded-br-md;
   }
   
   .message-bubble-received {
-    @apply bg-white text-whatsapp-gray-900 rounded-bl-md shadow-sm;
+    @apply bg-surface text-text rounded-bl-md shadow-sm border border-border;
   }
   
   .chat-input {
-    @apply flex-1 bg-white rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-whatsapp-green-500;
+    @apply flex-1 bg-surface rounded-lg px-4 py-2 text-sm text-text placeholder-text-secondary focus:outline-none focus:ring-2 focus:ring-primary border border-border;
   }
   
   .sidebar-item {
-    @apply flex items-center gap-3 px-4 py-3 hover:bg-whatsapp-gray-100 cursor-pointer transition-colors relative;
+    @apply flex items-center gap-3 px-4 py-3 hover:bg-hover cursor-pointer transition-colors relative;
   }
   
   .sidebar-item-active {
-    @apply bg-whatsapp-gray-200;
+    @apply bg-hover;
   }
   
   .sidebar-item-collapsed {
@@ -43,6 +67,6 @@
   }
   
   .unread-badge {
-    @apply absolute -top-1 -right-1 bg-whatsapp-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center;
+    @apply absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center;
   }
 }

@@ -3,6 +3,7 @@ import ChatWindow from './ChatWindow';
 import UserDiscovery from './UserDiscovery';
 import UserRegistration from './UserRegistration';
 import WelcomeScreen from './WelcomeScreen';
+import ThemeToggle from './ThemeToggle';
 import apiService from '../services/api';
 import socketService from '../services/socket';
 import { User, Chat } from '../types';
@@ -236,7 +237,7 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
   }
 
   return (
-    <div className="h-screen bg-whatsapp-gray-100">
+    <div className="h-screen bg-background">
       <RateLimitAlert 
         isVisible={showRateLimitAlert}
         onClose={() => setShowRateLimitAlert(false)}
@@ -247,9 +248,9 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
         <div className={`${isMobileView ? 'hidden' : 'block'} md:block transition-all duration-300 ease-in-out ${
           isSidebarCollapsed ? 'md:w-16' : 'md:w-80'
         }`}>
-          <div className="w-full md:w-80 bg-white border-r border-whatsapp-gray-200 flex flex-col">
+          <div className="w-full md:w-80 bg-surface border-r border-border flex flex-col">
             {/* Header */}
-            <div className="p-4 border-b border-whatsapp-gray-200">
+            <div className="p-4 border-b border-border">
               <div className="flex items-center justify-between mb-4">
                 <div className={`flex items-center gap-3 ${isSidebarCollapsed ? 'justify-center' : ''}`}>
                   <img
@@ -259,36 +260,37 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
                   />
                   {!isSidebarCollapsed && (
                     <div>
-                      <h1 className="font-semibold text-whatsapp-gray-900">{currentUser.name}</h1>
-                      <p className="text-sm text-whatsapp-gray-500">{currentUser.phoneNumber}</p>
+                      <h1 className="font-semibold text-text">{currentUser.name}</h1>
+                      <p className="text-sm text-text-secondary">{currentUser.phoneNumber}</p>
                     </div>
                   )}
                 </div>
                 {!isSidebarCollapsed && (
                   <div className="flex items-center gap-2">
+                    <ThemeToggle />
                     <button
                       onClick={() => {
                         console.log('Manual refresh triggered');
                         loadChats();
                       }}
-                      className="p-2 hover:bg-whatsapp-gray-100 rounded-lg transition-colors"
+                      className="p-2 hover:bg-hover rounded-lg transition-colors"
                       title="Refresh Chats"
                     >
-                      <RefreshCw className="w-5 h-5 text-whatsapp-gray-600" />
+                      <RefreshCw className="w-5 h-5 text-text-secondary" />
                     </button>
                     <button
                       onClick={() => setShowUserDiscovery(true)}
-                      className="p-2 hover:bg-whatsapp-gray-100 rounded-lg transition-colors"
+                      className="p-2 hover:bg-hover rounded-lg transition-colors"
                       title="Discover People"
                     >
-                      <Users className="w-5 h-5 text-whatsapp-gray-600" />
+                      <Users className="w-5 h-5 text-text-secondary" />
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="p-2 hover:bg-whatsapp-gray-100 rounded-lg transition-colors"
+                      className="p-2 hover:bg-hover rounded-lg transition-colors"
                       title="Logout"
                     >
-                      <LogOut className="w-5 h-5 text-whatsapp-gray-600" />
+                      <LogOut className="w-5 h-5 text-text-secondary" />
                     </button>
                   </div>
                 )}
@@ -298,13 +300,13 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
               <div className="hidden md:flex justify-center">
                 <button
                   onClick={toggleSidebar}
-                  className="p-2 hover:bg-whatsapp-gray-100 rounded-lg transition-colors"
+                  className="p-2 hover:bg-hover rounded-lg transition-colors"
                   title={isSidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
                 >
                   {isSidebarCollapsed ? (
-                    <Menu className="w-5 h-5 text-whatsapp-gray-600" />
+                    <Menu className="w-5 h-5 text-text-secondary" />
                   ) : (
-                    <X className="w-5 h-5 text-whatsapp-gray-600" />
+                    <X className="w-5 h-5 text-text-secondary" />
                   )}
                 </button>
               </div>
@@ -314,16 +316,16 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
             <div className="flex-1 overflow-y-auto">
               {isLoading ? (
                 <div className={`text-center ${isSidebarCollapsed ? 'p-2' : 'p-4'}`}>
-                  <p className="text-whatsapp-gray-500 text-xs">Loading...</p>
+                  <p className="text-text-secondary text-xs">Loading...</p>
                 </div>
               ) : chats.length === 0 ? (
                 <div className={`text-center ${isSidebarCollapsed ? 'p-2' : 'p-4'}`}>
                   {!isSidebarCollapsed && (
                     <>
-                      <p className="text-whatsapp-gray-500 mb-4">No conversations yet</p>
+                      <p className="text-text-secondary mb-4">No conversations yet</p>
                       <button
                         onClick={() => setShowUserDiscovery(true)}
-                        className="bg-whatsapp-green-500 text-white px-4 py-2 rounded-lg hover:bg-whatsapp-green-600 transition-colors"
+                        className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-hover transition-colors"
                       >
                         Discover People
                       </button>
@@ -353,19 +355,19 @@ const MainChatInterface = ({}: MainChatInterfaceProps) => {
                         {!isSidebarCollapsed && (
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between">
-                              <h3 className="font-medium text-whatsapp-gray-900 truncate">
+                              <h3 className="font-medium text-text truncate">
                                 {otherParticipant.name}
                               </h3>
-                              <span className="text-xs text-whatsapp-gray-500">
+                              <span className="text-xs text-text-secondary">
                                 {new Date(chat.lastMessageTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                               </span>
                             </div>
                             <div className="flex items-center justify-between mt-1">
-                              <p className="text-sm text-whatsapp-gray-600 truncate">
+                              <p className="text-sm text-text-secondary truncate">
                                 {chat.lastMessage || 'No messages yet'}
                               </p>
                               {chat.unreadCount > 0 && (
-                                <span className="bg-whatsapp-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-2">
+                                <span className="bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center ml-2">
                                   {chat.unreadCount}
                                 </span>
                               )}
