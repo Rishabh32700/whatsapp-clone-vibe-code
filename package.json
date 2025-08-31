@@ -1,6 +1,6 @@
 {
   "name": "whatsapp-clone",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "description": "A modern WhatsApp-like interface built with React and TypeScript",
   "main": "index.js",
