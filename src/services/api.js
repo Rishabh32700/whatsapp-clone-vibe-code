@@ -1,4 +1,8 @@
-const API_BASE_URL = 'http://localhost:5001/api';
+// API base URL - will use environment variable in production
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+
+// Socket URL - will use environment variable in production
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
 
 class ApiService {
   constructor() {

@@ -1,5 +1,8 @@
 import { io } from 'socket.io-client';
 
+// Socket URL - will use environment variable in production
+const SOCKET_URL = import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000';
+
 class SocketService {
   constructor() {
     this.socket = null;
@@ -13,7 +16,7 @@ class SocketService {
     }
 
     this.userId = userId;
-    this.socket = io('http://localhost:5001');
+    this.socket = io(SOCKET_URL);
 
     this.socket.on('connect', () => {
       console.log('Connected to Socket.io server');
